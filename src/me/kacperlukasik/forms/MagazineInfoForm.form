@@ -13,6 +13,7 @@
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <horizontalTextPosition value="4"/>
           <text value="Wydawnistwo"/>
         </properties>
       </component>
@@ -21,6 +22,7 @@
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <horizontalTextPosition value="4"/>
           <text value="Tytuł"/>
         </properties>
       </component>
@@ -29,6 +31,7 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <horizontalTextPosition value="4"/>
           <text value="Numer wydania"/>
         </properties>
       </component>
@@ -37,6 +40,7 @@
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <horizontalTextPosition value="4"/>
           <text value="Spis treści"/>
         </properties>
       </component>

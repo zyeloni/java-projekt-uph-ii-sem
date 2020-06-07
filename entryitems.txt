@@ -1,0 +1,7 @@
+
+3260e9aa-797b-4ac2-8a95-150d4fae4d40,Rozdział 1,str 1,3a736bb9-1df4-4b11-b981-14360da4393b
+cd5fc5b6-7262-42e9-ba71-d6856180e18a,Rozdział 2,str 60,3a736bb9-1df4-4b11-b981-14360da4393b
+f0a2d438-bbc2-4dbf-8499-bb22afba2450,Rozdział 3,str 80,3a736bb9-1df4-4b11-b981-14360da4393b
+ef58c80c-6972-431b-bd57-016129460a92,cały przekrój zagadnień z angielskiej gramatyk, str 1,78bc71b8-eec7-4573-9206-e2eabbe9db97
+199062a2-61e4-46ad-8a98-840b5b448346,proste objaśnienia po polsku i po ludzku, str 2,78bc71b8-eec7-4573-9206-e2eabbe9db97
+0ee915e1-a948-43d5-b919-71d7c5b72050,obrazowe i życiowe przykłady z ery internetu i XXI wieku, str 3,78bc71b8-eec7-4573-9206-e2eabbe9db97
