@@ -53,4 +53,10 @@ public class EntryItem
     {
         this.magazineId = magazineId;
     }
+
+    @Override
+    public String toString()
+    {
+        return String.format("%s,%s,%s,%s", id, title, desc, magazineId);
+    }
 }

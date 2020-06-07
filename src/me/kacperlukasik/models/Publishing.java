@@ -49,6 +49,6 @@ public class Publishing
     @Override
     public String toString()
     {
-        return String.format("%s;%s", id);
+        return String.format("%s,%s", id, title);
     }
 }

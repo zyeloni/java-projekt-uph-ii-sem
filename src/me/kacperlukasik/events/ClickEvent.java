@@ -1,4 +1,4 @@
-package me.kacperlukasik.event;
+package me.kacperlukasik.events;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

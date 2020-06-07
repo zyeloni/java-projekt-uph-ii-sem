@@ -2,12 +2,15 @@ package me.kacperlukasik.models.repository;
 
 import me.kacperlukasik.database.DatabaseTable;
 import me.kacperlukasik.database.IRepository;
+import me.kacperlukasik.models.Magazine;
 import me.kacperlukasik.models.Publishing;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 
 public class PublishingRepository extends DatabaseTable implements IRepository<Publishing>
 {
@@ -19,11 +22,11 @@ public class PublishingRepository extends DatabaseTable implements IRepository<P
     @Override
     public List<Publishing> getAll()
     {
-        ArrayList<Publishing> results = new ArrayList<>();
-
         reloadDatabase();
+        ArrayList<Publishing> publishings = new ArrayList<>();
 
         Scanner scanner = getScanner();
+        MagazineRepository magazineRepository = new MagazineRepository();
 
         while (scanner.hasNextLine())
         {
@@ -32,18 +35,22 @@ public class PublishingRepository extends DatabaseTable implements IRepository<P
             if (valueLine == "")
                 continue;
 
-            StringTokenizer tokenizer = new StringTokenizer(valueLine);
+            StringTokenizer tokenizer = new StringTokenizer(valueLine, ",");
 
             if (tokenizer.hasMoreTokens())
             {
                 Publishing publishing = new Publishing();
                 publishing.setId(tokenizer.nextToken());
                 publishing.setTitle(tokenizer.nextToken());
-                //TODO Repository Magazine
+
+                List<Magazine> magazines = magazineRepository.getAll().stream().filter(x -> x.getPublishingId().equalsIgnoreCase(publishing.getId())).collect(Collectors.toList());
+                publishing.setMagazines(magazines);
+
+                publishings.add(publishing);
             }
         }
 
-        return results;
+        return publishings;
     }
 
     @Override
@@ -52,6 +59,7 @@ public class PublishingRepository extends DatabaseTable implements IRepository<P
         reloadDatabase();
 
         Scanner scanner = getScanner();
+        MagazineRepository magazineRepository = new MagazineRepository();
 
         while (scanner.hasNextLine())
         {
@@ -60,15 +68,20 @@ public class PublishingRepository extends DatabaseTable implements IRepository<P
             if (valueLine == "")
                 continue;
 
-            StringTokenizer tokenizer = new StringTokenizer(valueLine);
+            StringTokenizer tokenizer = new StringTokenizer(valueLine, ",");
+            String _id = tokenizer.nextToken();
 
-            if (tokenizer.hasMoreTokens())
+            if (_id.equals(id))
             {
                 Publishing publishing = new Publishing();
 
-                publishing.setId(tokenizer.nextToken());
+                publishing.setId(_id);
                 publishing.setTitle(tokenizer.nextToken());
-                //TODO Repository Magazine
+
+                List<Magazine> magazines = magazineRepository.getAll().stream().filter(x -> x.getPublishingId() == publishing.getId()).collect(Collectors.toList());
+                publishing.setMagazines(magazines);
+
+                return publishing;
             }
         }
 
@@ -76,55 +89,20 @@ public class PublishingRepository extends DatabaseTable implements IRepository<P
     }
 
     @Override
-    public boolean update(Publishing object)
-    {
-        return false;
-    }
-
-    @Override
-    public boolean delete(String id)
-    {
-        return false;
-    }
-
-    @Override
     public boolean create(Publishing object)
     {
         reloadDatabase();
-        setAppend();
 
         if (object == null)
             return false;
 
-        getPrintWriter().println(object.toString());
-        //TODO Magazine Repository
+        PrintWriter printWriter = getPrintWriter();
+        MagazineRepository magazineRepository = new MagazineRepository();
+
+        printWriter.println(object.toString());
+
+        printWriter.close();
 
         return true;
-    }
-
-    @Override
-    public boolean exist(String id)
-    {
-        reloadDatabase();
-
-        Scanner scanner = getScanner();
-
-        while (scanner.hasNextLine())
-        {
-            String valueLine = scanner.nextLine();
-
-            if (valueLine == "")
-                continue;
-
-            StringTokenizer tokenizer = new StringTokenizer(valueLine);
-
-            if (tokenizer.countTokens() >= 1)
-            {
-                if (tokenizer.nextToken() == id)
-                    return true;
-            }
-        }
-
-        return false;
     }
 }

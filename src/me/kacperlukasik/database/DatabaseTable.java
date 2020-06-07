@@ -19,22 +19,12 @@ public abstract class DatabaseTable
     {
         try
         {
-            printWriter = new PrintWriter(FILE_NAME);
+            FileWriter fileWriter = new FileWriter(FILE_NAME, true);
+            this.printWriter = new PrintWriter(fileWriter);
             scanner = new Scanner(new File(FILE_NAME));
         } catch (FileNotFoundException e)
         {
             e.printStackTrace();
-        }
-    }
-
-    public void setAppend()
-    {
-        FileWriter fileWriter = null;
-
-        try
-        {
-            fileWriter = new FileWriter(FILE_NAME, true);
-            this.printWriter = new PrintWriter(fileWriter);
         } catch (IOException e)
         {
             e.printStackTrace();

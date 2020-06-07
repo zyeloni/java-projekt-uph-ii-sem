@@ -69,6 +69,6 @@ public class Magazine
     @Override
     public String toString()
     {
-        return String.format("%s,%s,%d,%s",id,title,number,publishingId);
+        return String.format("%s,%s,%d,%s", id, title, number, publishingId);
     }
 }
