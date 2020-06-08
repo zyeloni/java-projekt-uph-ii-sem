@@ -15,7 +15,7 @@ public abstract class DatabaseTable
         reloadDatabase();
     }
 
-    public void reloadDatabase()
+    protected void reloadDatabase()
     {
         try
         {
@@ -31,12 +31,12 @@ public abstract class DatabaseTable
         }
     }
 
-    public Scanner getScanner()
+    protected Scanner getScanner()
     {
         return scanner;
     }
 
-    public PrintWriter getPrintWriter()
+    protected PrintWriter getPrintWriter()
     {
         return printWriter;
     }

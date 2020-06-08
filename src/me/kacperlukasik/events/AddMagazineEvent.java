@@ -1,6 +1,7 @@
 package me.kacperlukasik.events;
 
-import me.kacperlukasik.forms.AddMagazineForm;
+import me.kacperlukasik.ComboItem;
+import me.kacperlukasik.exceptions.NoFillException;
 import me.kacperlukasik.forms.MagazineMenu;
 import me.kacperlukasik.forms.dialogs.ErrorDialog;
 import me.kacperlukasik.models.EntryItem;
@@ -14,17 +15,16 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class AddMagazineEvent implements ActionListener
 {
     JFrame jFrame;
-    String publishing;
+    JComboBox publishing;
     JTextField title;
     JSpinner number;
     JList entryItems;
 
-    public AddMagazineEvent(String publishing, JTextField title, JSpinner number, JList entryItems, JFrame jFrame)
+    public AddMagazineEvent(JComboBox publishing, JTextField title, JSpinner number, JList entryItems, JFrame jFrame)
     {
         this.publishing = publishing;
         this.title = title;
@@ -33,7 +33,7 @@ public class AddMagazineEvent implements ActionListener
         this.jFrame = jFrame;
     }
 
-    private boolean validate()
+    private boolean validate() throws NoFillException
     {
         try
         {
@@ -47,23 +47,24 @@ public class AddMagazineEvent implements ActionListener
         {
             if (entryItems.getModel().getSize() > 0)
                 return true;
-
-            return false;
         }
 
-        return false;
+        throw new NoFillException("Nie wszystkie pola zostały wypełnione !");
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if (!validate())
+        try
+        {
+            validate();
+        }
+        catch (NoFillException noFillException)
         {
             ErrorDialog errorDialog = new ErrorDialog("<html>Nie wszystkie pola zostały wypełnione ! <br> Lub nie zostały dobrze wypełnione</html>");
             errorDialog.pack();
             errorDialog.setVisible(true);
-
             return;
         }
 
@@ -71,7 +72,11 @@ public class AddMagazineEvent implements ActionListener
         MagazineRepository magazineRepository = new MagazineRepository();
 
         magazine.setTitle(title.getText());
-        magazine.setPublishingId(publishing);
+
+        Object item = publishing.getSelectedItem();
+        String publishingItem = ((ComboItem)item).getValue();
+
+        magazine.setPublishingId(publishingItem);
         magazine.setNumber((Integer) number.getValue());
 
         List<EntryItem> entryItemList = new ArrayList<EntryItem>();

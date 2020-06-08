@@ -1,5 +1,6 @@
 package me.kacperlukasik.models.repository;
 
+import me.kacperlukasik.database.DBConfig;
 import me.kacperlukasik.database.DatabaseTable;
 import me.kacperlukasik.database.IRepository;
 import me.kacperlukasik.models.Magazine;
@@ -16,7 +17,7 @@ public class PublishingRepository extends DatabaseTable implements IRepository<P
 {
     public PublishingRepository()
     {
-        super("publishing.txt");
+        super(DBConfig.DB_PUBLISHING_NAME);
     }
 
     @Override

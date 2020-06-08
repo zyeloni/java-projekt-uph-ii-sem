@@ -1,5 +1,6 @@
 package me.kacperlukasik.models.repository;
 
+import me.kacperlukasik.database.DBConfig;
 import me.kacperlukasik.database.DatabaseTable;
 import me.kacperlukasik.database.IRepository;
 import me.kacperlukasik.models.EntryItem;
@@ -16,7 +17,7 @@ public class MagazineRepository extends DatabaseTable implements IRepository<Mag
 {
     public MagazineRepository()
     {
-        super("magazine.txt");
+        super(DBConfig.DB_MAGAZINE_NAME);
     }
 
     @Override

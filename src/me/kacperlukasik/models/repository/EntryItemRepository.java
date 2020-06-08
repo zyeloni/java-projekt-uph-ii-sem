@@ -1,5 +1,6 @@
 package me.kacperlukasik.models.repository;
 
+import me.kacperlukasik.database.DBConfig;
 import me.kacperlukasik.database.DatabaseTable;
 import me.kacperlukasik.database.IRepository;
 import me.kacperlukasik.models.EntryItem;
@@ -14,7 +15,7 @@ public class EntryItemRepository extends DatabaseTable implements IRepository<En
 {
     public EntryItemRepository()
     {
-        super("entryitems.txt");
+        super(DBConfig.DB_ENTRY_ITEM_NAME);
     }
 
     @Override

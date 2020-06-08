@@ -2,6 +2,7 @@ package me.kacperlukasik.forms;
 
 import me.kacperlukasik.ComboItem;
 import me.kacperlukasik.events.AddMagazineEvent;
+import me.kacperlukasik.exceptions.NoFillException;
 import me.kacperlukasik.forms.dialogs.ErrorDialog;
 import me.kacperlukasik.models.Publishing;
 import me.kacperlukasik.models.repository.PublishingRepository;
@@ -42,12 +43,20 @@ public class AddMagazineForm extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                addEntryItem();
+                try
+                {
+                    addEntryItem();
+                } catch (NoFillException noFillException)
+                {
+                    ErrorDialog errorDialog = new ErrorDialog("Wypełnij wszystkie pola w spisie treści !");
+                    errorDialog.pack();
+                    errorDialog.setVisible(true);
+                }
             }
         });
 
         addBtn.addActionListener(new AddMagazineEvent(
-                ((ComboItem) publishingField.getSelectedItem()).getValue(),
+                publishingField,
                 titleField,
                 numberField,
                 list1,
@@ -67,14 +76,11 @@ public class AddMagazineForm extends JFrame
 
     }
 
-    private void addEntryItem()
+    private void addEntryItem() throws NoFillException
     {
         if (titleEntryItem.getText().equals("") || desEntryItem.getText().equals(""))
         {
-            ErrorDialog errorDialog = new ErrorDialog("Wypełnij wszystkie pola w spisie treści !");
-            errorDialog.pack();
-            errorDialog.setVisible(true);
-            return;
+            throw new NoFillException("Nie wszystkie pola zostały wypełnione !");
         }
 
         entryModel.add(listCount, titleEntryItem.getText() + " : " + desEntryItem.getText());

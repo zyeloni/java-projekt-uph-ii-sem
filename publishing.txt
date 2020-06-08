@@ -4,3 +4,4 @@
 2ed14cd3-26ce-45f1-be72-f42607f36d76,Operon
 db6e3a26-a08b-4305-bae3-dcac9215a5f9,Helion
 f2b54684-e3b2-439c-be27-fd61940524bd,Altenberg
+50baf3a1-ab19-414e-968f-93141e6de758,Bauer
